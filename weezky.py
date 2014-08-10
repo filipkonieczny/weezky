@@ -67,7 +67,7 @@ def connect_to_channels(channels):
 
     for channel in channels:
         s.send("JOIN %s\r\n" % channel)
-        s.send("PRIVMSG %s :%s\r\n" % (channel, hello_msg))
+        # s.send("PRIVMSG %s :%s\r\n" % (channel, hello_msg))
 
 
 def get_command(mode, channel, command):
@@ -75,6 +75,8 @@ def get_command(mode, channel, command):
     '''
     '''
 
+
+    message = ""
 
     # TODO: check if command was directed from a channel(#) or from a PM
     if mode == 'PRIVMSG':
@@ -86,8 +88,11 @@ def get_command(mode, channel, command):
         msg = random.choice(quotes['kicked'])
         message = rejoin(s, channel, msg)
 
-
-    s.send(message)
+    # TODO: Add displaying current time
+    # TODO: What to display?
+    if message:
+        print("!!!!!! %s" % message)
+        s.send(message)
 
 
 def get_input(line):
@@ -99,13 +104,14 @@ def get_input(line):
     for i, item in enumerate(line):
         # TODO: make the bot understand commands
         # TODO: make the bot react to commands
+        # TODO: trim the user that sends messages
         if item in modes:
             mode = item
             channel = line[i + 1]
             command = line[i + 2]
             get_command(mode, channel, command)
 
-        # TODO: Add displaying current time, like in every IRC client
+        # TODO: What to display?
         print item,
 
     print ""
