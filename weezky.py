@@ -53,6 +53,22 @@ def connect_to_channels(channels):
         s.send("PRIVMSG %s :%s\r\n" % (channel, hello_msg))
 
 
+def get_mode():
+    '''
+    '''
+
+
+    pass 
+
+
+def get_channel():
+    '''
+    '''
+
+
+    pass
+
+
 def main():
     '''
 
