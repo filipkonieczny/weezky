@@ -14,13 +14,14 @@ import time
 import json
 import random
 
-from commands import rejoin
+from commands import rejoin, uptime
 
 
 # settings
 s = socket.socket()
 channels = ['#weezky', '#jhgrng']
 modes = ['PRIVMSG', 'KICK']
+time_at_start = time.time()
 
 
 # quotes
@@ -61,6 +62,7 @@ def connect_to_channels(channels):
     '''
 
 
+    # TODO: Add some randomized quotes.
     hello_msg = "Hello, world!"
 
     for channel in channels:
@@ -74,8 +76,13 @@ def get_command(mode, channel, command):
     '''
 
 
+    # TODO: check if command was directed from a channel(#) or from a PM
     if mode == 'PRIVMSG':
-        pass
+        print command
+
+        if '!uptime' in command:
+            current_time = time.time() - time_at_start
+            uptime(s, channel, current_time)
 
     elif mode == 'KICK':
         msg = random.choice(quotes['kicked'])
@@ -98,6 +105,7 @@ def get_input(line):
             command = line[i + 2]
             get_command(mode, channel, command)
 
+        # TODO: Add displaying current time, like in every IRC client
         print item,
 
     print ""
@@ -113,7 +121,6 @@ def main():
     # TODO: documentation
     setup()
     display_hello_message()
-    time_at_start = time.time()
 
     connected = False
     readbuffer = ""
