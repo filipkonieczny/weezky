@@ -78,16 +78,16 @@ def get_command(mode, channel, command):
 
     # TODO: check if command was directed from a channel(#) or from a PM
     if mode == 'PRIVMSG':
-        print command
-
         if '!uptime' in command:
             current_time = time.time() - time_at_start
-            uptime(s, channel, current_time)
+            message = uptime(s, channel, current_time)
 
     elif mode == 'KICK':
         msg = random.choice(quotes['kicked'])
-        print msg
-        rejoin(s, channel, msg)
+        message = rejoin(s, channel, msg)
+
+
+    s.send(message)
 
 
 def get_input(line):
