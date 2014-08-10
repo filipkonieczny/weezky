@@ -78,6 +78,7 @@ def main():
     setup()
     display_hello_message()
 
+    connected = False
     readbuffer = "" 
 
 
@@ -97,7 +98,9 @@ def main():
 
             if(line[0]=="PING"):
                 s.send("PONG %s\r\n" % line[1])
-                connect_to_channels(channels)
+                if not connected:
+                    connect_to_channels(channels)
+                    connected = True
 
 
 # run the main function
