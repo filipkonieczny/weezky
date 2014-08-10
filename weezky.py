@@ -12,10 +12,13 @@ import socket
 import string
 import time
 
+from commands import rejoin
+
 
 # settings
 s = socket.socket()
 channels = ['#weezky', '#jhgrng']
+modes = ['PRIVMSG', 'KICK']
 
 
 # functions
@@ -58,7 +61,7 @@ def connect_to_channels(channels):
         s.send("PRIVMSG %s :%s\r\n" % (channel, hello_msg))
 
 
-def get_mode(mode):
+def get_command(mode, channel, command):
     # TODO: documentation
     '''
     '''
@@ -67,17 +70,28 @@ def get_mode(mode):
     if mode == 'PRIVMSG':
         pass
 
-    if mode == 'KICK':
-        pass
+    elif mode == 'KICK':
+        rejoin(s, channel)
 
 
-def get_channel():
+def get_input(line):
     # TODO: documentation
     '''
     '''
 
 
-    pass
+    for i, item in enumerate(line):
+        # TODO: make the bot understand commands
+        # TODO: make the bot react to commands
+        if item in modes:
+            mode = item
+            channel = line[i + 1]
+            command = line[i + 2]
+            get_command(mode, channel, command)
+
+        print item,
+
+    print ""
 
 
 def main():
@@ -107,13 +121,7 @@ def main():
             line = string.rstrip(line)
             line = string.split(line)
 
-            # TODO: documentation
-            for i in line:
-                # TODO: make the bot understand commands
-                # TODO: make the bot react to commands
-                print i,
-
-            print ""
+            get_input(line)
 
             # TODO: documentation
             if(line[0]=="PING"):
