@@ -11,6 +11,8 @@ import sys
 import socket
 import string
 import time
+import json
+import random
 
 from commands import rejoin
 
@@ -19,6 +21,11 @@ from commands import rejoin
 s = socket.socket()
 channels = ['#weezky', '#jhgrng']
 modes = ['PRIVMSG', 'KICK']
+
+
+# quotes
+quotes_file = open('quotes.json').read()
+quotes = json.loads(quotes_file)
 
 
 # functions
@@ -71,7 +78,9 @@ def get_command(mode, channel, command):
         pass
 
     elif mode == 'KICK':
-        rejoin(s, channel)
+        msg = random.choice(quotes['kicked'])
+        print msg
+        rejoin(s, channel, msg)
 
 
 def get_input(line):
