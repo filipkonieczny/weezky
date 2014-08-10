@@ -10,6 +10,7 @@
 import sys
 import socket
 import string
+import time
 
 
 # settings
@@ -85,6 +86,7 @@ def main():
     # TODO: documentation
     setup()
     display_hello_message()
+    time_at_start = time.time()
 
     connected = False
     readbuffer = "" 
