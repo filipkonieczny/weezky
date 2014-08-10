@@ -58,13 +58,17 @@ def connect_to_channels(channels):
         s.send("PRIVMSG %s :%s\r\n" % (channel, hello_msg))
 
 
-def get_mode():
+def get_mode(mode):
     # TODO: documentation
     '''
     '''
 
 
-    pass 
+    if mode == 'PRIVMSG':
+        pass
+
+    if mode == 'KICK':
+        pass
 
 
 def get_channel():
@@ -89,7 +93,7 @@ def main():
     time_at_start = time.time()
 
     connected = False
-    readbuffer = "" 
+    readbuffer = ""
 
 
     while True:
