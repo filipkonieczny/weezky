@@ -23,7 +23,7 @@ def rejoin(socket, channel, msg=""):
     s.send('JOIN %s\r\n' % channel)
 
     if msg:
-        s.send('PRIVMSG %s :%s\r\n' % (channel, msg))
+        return 'PRIVMSG %s :%s\r\n' % (channel, msg)
 
 
 def format_time(time):
@@ -67,4 +67,5 @@ def uptime(socket, channel, uptime):
                                                                              uptime['hours'],
                                                                              uptime['minutes'],
                                                                              uptime['seconds'])
-    s.send('PRIVMSG %s :%s\r\n' % (channel, msg))
+
+    return 'PRIVMSG %s :%s\r\n' % (channel, msg)
