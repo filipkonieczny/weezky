@@ -3,6 +3,7 @@
 
 
 # description
+# TODO: documentation
 
 
 # imports
@@ -18,6 +19,7 @@ channels = ['#weezky', '#jhgrng']
 
 # functions
 def setup():
+    # TODO: documentation
     '''
 
     '''
@@ -33,6 +35,7 @@ def setup():
 
 
 def display_hello_message():
+    # TODO: documentation
     '''
     '''
 
@@ -41,6 +44,7 @@ def display_hello_message():
 
 
 def connect_to_channels(channels):
+    # TODO: documentation
     '''
 
     '''
@@ -54,6 +58,7 @@ def connect_to_channels(channels):
 
 
 def get_mode():
+    # TODO: documentation
     '''
     '''
 
@@ -62,6 +67,7 @@ def get_mode():
 
 
 def get_channel():
+    # TODO: documentation
     '''
     '''
 
@@ -70,11 +76,13 @@ def get_channel():
 
 
 def main():
+    # TODO: documentation
     '''
 
     '''
 
 
+    # TODO: documentation
     setup()
     display_hello_message()
 
@@ -83,19 +91,25 @@ def main():
 
 
     while True:
+        # TODO: documentation
         readbuffer = readbuffer + s.recv(1024)
         temp = string.split(readbuffer, "\n")
         readbuffer = temp.pop( )
 
+        # TODO: documentation
         for line in temp:
             line = string.rstrip(line)
             line = string.split(line)
 
+            # TODO: documentation
             for i in line:
+                # TODO: make the bot understand commands
+                # TODO: make the bot react to commands
                 print i,
 
             print ""
 
+            # TODO: documentation
             if(line[0]=="PING"):
                 s.send("PONG %s\r\n" % line[1])
                 if not connected:
