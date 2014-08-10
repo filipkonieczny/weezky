@@ -13,6 +13,7 @@ import string
 
 # settings
 s = socket.socket()
+channels = ['#weezky', '#jhgrng']
 
 
 # functions
@@ -25,12 +26,10 @@ def setup():
     host = "irc.quakenet.net"
     port = 6667
     nick = "weezky"
-    ident = "weezky"
-    realname = "weezky"
 
     s.connect(('irc.quakenet.org', 6667))
     s.send("NICK %s\r\n" % nick)
-    s.send("USER %s %s bla :%s\r\n" % (ident, host, realname))
+    s.send("USER %s %s bla :%s\r\n" % (nick, nick, nick))
 
 
 def display_hello_message():
@@ -39,6 +38,19 @@ def display_hello_message():
 
 
     print("\nHello!\n\n\n")
+
+
+def connect_to_channels(channels):
+    '''
+
+    '''
+
+
+    hello_msg = "Hello, world!"
+
+    for channel in channels:
+        s.send("JOIN %s\r\n" % channel)
+        s.send("PRIVMSG %s :%s\r\n" % (channel, hello_msg))
 
 
 def main():
@@ -69,8 +81,7 @@ def main():
 
             if(line[0]=="PING"):
                 s.send("PONG %s\r\n" % line[1])
-                s.send("JOIN #weezky\r\n")
-                s.send("PRIVMSG #weezky %s\r\n" % ("Yo!"))
+                connect_to_channels(channels)
 
 
 # run the main function
