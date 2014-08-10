@@ -33,23 +33,23 @@ def format_time(time):
 
     uptime = {}
 
-    seconds_in_day = 60 * 60 * 24
-    seconds_in_hour = 60 * 60
-    seconds_in_minute = 60
+    seconds_in_day = 60 * 60 * 24 * 1.0
+    seconds_in_hour = 60 * 60 * 1.0
+    seconds_in_minute = 60 * 1.0
 
-    days = time / seconds_in_day
+    days = int(time / seconds_in_day)
     uptime['days'] = days
     time -= days * seconds_in_day
 
-    hours = time / seconds_in_hour
+    hours = int(time / seconds_in_hour)
     uptime['hours'] = hours
     time -= hours * seconds_in_hour
 
-    minutes = time / seconds_in_minute
+    minutes = int(time / seconds_in_minute)
     uptime['minutes'] = minutes
     time -= minutes * seconds_in_minute
 
-    uptime['seconds'] = time
+    uptime['seconds'] = int(time)
 
     return uptime
 
