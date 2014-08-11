@@ -55,6 +55,17 @@ def display_hello_message():
     print("\nHello!\n\n\n")
 
 
+def parse_sender_info(sender):
+    # TODO: documentation
+    '''
+    '''
+
+
+    for i, letter in sender:
+        if letter == '!':
+            return sender[1:i]
+
+
 def connect_to_channels(channels):
     # TODO: documentation
     '''
@@ -70,7 +81,7 @@ def connect_to_channels(channels):
         # s.send("PRIVMSG %s :%s\r\n" % (channel, hello_msg))
 
 
-def get_command(mode, channel, command):
+def get_command(mode, channel, command, sender):
     # TODO: documentation
     '''
     '''
@@ -91,7 +102,7 @@ def get_command(mode, channel, command):
     # TODO: Add displaying current time
     # TODO: What to display?
     if message:
-        print("!!!!!! %s" % message)
+        print(">>> %s" % message[:-4])
         s.send(message)
 
 
@@ -105,14 +116,17 @@ def get_input(line):
         # TODO: make the bot understand commands
         # TODO: make the bot react to commands
         # TODO: trim the user that sends messages
+        # TODO: format: date, mode, channel, sender, msg
         if item in modes:
             mode = item
+            sender = line[i - 1]
             channel = line[i + 1]
             command = line[i + 2]
-            get_command(mode, channel, command)
+            get_command(mode, channel, command, sender)
 
-        # TODO: What to display?
-        print item,
+        else:
+            # TODO: What to display?
+            print item + " | ",
 
     print ""
 
