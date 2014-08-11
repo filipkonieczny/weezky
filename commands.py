@@ -12,13 +12,11 @@
 
 
 # functions
-def rejoin(socket, channel, msg=""):
+def rejoin(channel, msg=""):
     # TODO: documentation
     '''
     '''
 
-
-    s = socket
 
     s.send('JOIN %s\r\n' % channel)
 
@@ -54,13 +52,11 @@ def format_time(time):
     return uptime
 
 
-def uptime(socket, channel, uptime):
+def uptime(channel, uptime):
     # TODO: documentation
     '''
     '''
 
-
-    s = socket
 
     uptime = format_time(uptime)
     msg = "Current uptime: %s days, %s hours, %s minutes and %s seconds." % (uptime['days'],

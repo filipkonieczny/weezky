@@ -93,11 +93,11 @@ def get_command(mode, channel, command, sender):
     if mode == 'PRIVMSG':
         if '!uptime' in command:
             current_time = time.time() - time_at_start
-            message = uptime(s, channel, current_time)
+            message = uptime(channel, current_time)
 
     elif mode == 'KICK':
         msg = random.choice(quotes['kicked'])
-        message = rejoin(s, channel, msg)
+        message = rejoin(channel, msg)
 
     # TODO: Add displaying current time
     # TODO: What to display?
