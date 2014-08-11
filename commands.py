@@ -122,3 +122,13 @@ def gif(channel, tags):
     data = data["data"]["image_original_url"]
 
     return 'PRIVMSG %s :%s\r\n' % (channel, data)
+
+
+def join(s, channels):
+    # TODO: documentation
+    '''
+    '''
+
+
+    for i in channels:
+        s.send('JOIN %s\r\n' % i)

@@ -14,7 +14,7 @@ import time
 import json
 import random
 
-from commands import rejoin, uptime, gif
+from commands import rejoin, uptime, gif, join
 
 
 # settings
@@ -120,6 +120,11 @@ def get_command(mode, channel, command, sender):
         elif ':!gif' in command:
             tags = strip_sentence(':!gif', command)
             message = gif(channel, tags)
+
+        elif ':!join' in command:
+            # TODO: return some kind of a message?
+            channels = strip_sentence(':!join', command)
+            join(s, channels)
 
     elif mode == 'KICK':
         msg = random.choice(quotes['kicked'])
