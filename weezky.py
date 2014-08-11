@@ -14,7 +14,7 @@ import time
 import json
 import random
 
-from commands import rejoin, uptime
+from commands import rejoin, uptime, gif
 
 
 # settings
@@ -81,6 +81,28 @@ def connect_to_channels(channels):
         # s.send("PRIVMSG %s :%s\r\n" % (channel, hello_msg))
 
 
+def get_tags(statement, command):
+    # TODO: documentation
+    '''
+    '''
+
+
+    tags = []
+
+    for i, item in enumerate(command):
+        if item == statement:
+            tags.extend(command[i:])
+            break
+
+    if len(tags) > 1:
+        tags = tags[1:]
+
+    else:
+        return []
+
+    return tags
+
+
 def get_command(mode, channel, command, sender):
     # TODO: documentation
     '''
@@ -91,9 +113,14 @@ def get_command(mode, channel, command, sender):
 
     # TODO: check if command was directed from a channel(#) or from a PM
     if mode == 'PRIVMSG':
-        if '!uptime' in command:
+        print command
+        if ':!uptime' in command:
             current_time = time.time() - time_at_start
             message = uptime(channel, current_time)
+
+        elif ':!gif' in command:
+            tags = get_tags(':!gif', command)
+            message = gif(channel, tags)
 
     elif mode == 'KICK':
         msg = random.choice(quotes['kicked'])
@@ -121,7 +148,7 @@ def get_input(line):
             mode = item
             sender = line[i - 1]
             channel = line[i + 1]
-            command = line[i + 2]
+            command = line[i:]
             get_command(mode, channel, command, sender)
 
         else:
