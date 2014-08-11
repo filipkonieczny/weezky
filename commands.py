@@ -126,9 +126,21 @@ def gif(channel, tags):
 
 def join(s, channels):
     # TODO: documentation
+    # TODO: check if user is already there, if is then:
+    # TODO: display something like: "I'm already there, silly!"
     '''
     '''
 
 
     for i in channels:
         s.send('JOIN %s\r\n' % i)
+
+
+def part(s, channels):
+    # TODO: documentation
+    '''
+    '''
+
+
+    for i in channels:
+        s.send('PART %s\r\n' % i)

@@ -14,7 +14,7 @@ import time
 import json
 import random
 
-from commands import rejoin, uptime, gif, join
+from commands import rejoin, uptime, gif, join, part
 
 
 # settings
@@ -111,6 +111,7 @@ def get_command(mode, channel, command, sender):
     message = ""
 
     # TODO: check if command was directed from a channel(#) or from a PM
+    # TODO: group those commands somewhere?
     if mode == 'PRIVMSG':
         print command
         if ':!uptime' in command:
@@ -125,6 +126,11 @@ def get_command(mode, channel, command, sender):
             # TODO: return some kind of a message?
             channels = strip_sentence(':!join', command)
             join(s, channels)
+
+        elif ':!part' in command:
+            # TODO: return some kind of a message?
+            channels = strip_sentence(':!part', command)
+            part(s, channels)
 
     elif mode == 'KICK':
         msg = random.choice(quotes['kicked'])
