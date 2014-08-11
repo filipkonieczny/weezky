@@ -80,26 +80,26 @@ def connect_to_channels(channels):
         s.send("JOIN %s\r\n" % channel)
 
 
-def get_tags(statement, command):
+def strip_sentence(statement, command):
     # TODO: documentation
     '''
     '''
 
 
-    tags = []
+    words = []
 
     for i, item in enumerate(command):
         if item == statement:
-            tags.extend(command[i:])
+            words.extend(command[i:])
             break
 
-    if len(tags) > 1:
-        tags = tags[1:]
+    if len(words) > 1:
+        words = words[1:]
 
     else:
         return []
 
-    return tags
+    return words
 
 
 def get_command(mode, channel, command, sender):
@@ -118,7 +118,7 @@ def get_command(mode, channel, command, sender):
             message = uptime(channel, current_time)
 
         elif ':!gif' in command:
-            tags = get_tags(':!gif', command)
+            tags = strip_sentence(':!gif', command)
             message = gif(channel, tags)
 
     elif mode == 'KICK':
