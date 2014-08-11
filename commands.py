@@ -13,13 +13,12 @@ import urllib, json
 
 
 # functions
-def rejoin(channel, msg=""):
+def rejoin(socket, channel, msg=""):
     # TODO: documentation
     '''
     '''
 
-
-    s.send('JOIN %s\r\n' % channel)
+    socket.send('JOIN %s\r\n' % channel)
 
     if msg:
         return 'PRIVMSG %s :%s\r\n' % (channel, msg)

@@ -78,7 +78,6 @@ def connect_to_channels(channels):
 
     for channel in channels:
         s.send("JOIN %s\r\n" % channel)
-        # s.send("PRIVMSG %s :%s\r\n" % (channel, hello_msg))
 
 
 def get_tags(statement, command):
@@ -124,7 +123,7 @@ def get_command(mode, channel, command, sender):
 
     elif mode == 'KICK':
         msg = random.choice(quotes['kicked'])
-        message = rejoin(channel, msg)
+        message = rejoin(s, channel, msg)
 
     # TODO: Add displaying current time
     # TODO: What to display?
@@ -169,7 +168,6 @@ def main():
     setup()
     display_hello_message()
 
-    connected = False
     readbuffer = ""
 
 
@@ -189,9 +187,7 @@ def main():
             # TODO: documentation
             if(line[0]=="PING"):
                 s.send("PONG %s\r\n" % line[1])
-                if not connected:
-                    connect_to_channels(channels)
-                    connected = True
+                connect_to_channels(channels)
 
 
 # run the main function
