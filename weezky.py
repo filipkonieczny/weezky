@@ -14,7 +14,7 @@ import time
 import json
 import random
 
-from commands import rejoin, uptime, gif, join, part
+from commands import rejoin, uptime, gif, join, part, quote
 
 
 # settings
@@ -131,6 +131,11 @@ def get_command(mode, channel, command, sender):
             # TODO: return some kind of a message?
             channels = strip_sentence(':!part', command)
             part(s, channels)
+
+        elif ':!quote' in command:
+            # TODO: how to exactly pass a random quote?
+            msg = random.choice(quotes['quotes'])
+            message = quote(channel, msg)
 
     elif mode == 'KICK':
         msg = random.choice(quotes['kicked'])

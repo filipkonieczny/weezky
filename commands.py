@@ -144,3 +144,12 @@ def part(s, channels):
 
     for i in channels:
         s.send('PART %s\r\n' % i)
+
+
+def quote(channel, msg):
+    # TODO: documentation
+    '''
+    '''
+
+
+    return 'PRIVMSG %s :%s\r\n' % (channel, msg)
