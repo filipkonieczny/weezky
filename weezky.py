@@ -3,7 +3,9 @@
 
 
 # description
-# TODO: documentation
+# weezky - a Python IRC bot.
+# Joins channels, listens and sometimes does something.
+# You can find currently available commands in commands.py.
 
 
 # imports
@@ -30,8 +32,8 @@ quotes = json.loads(quotes_file)
 
 # functions
 def setup():
-    # TODO: documentation
-    '''
+    '''Establishes the connection. Simple as that.
+
     '''
 
     nick = "weezky"
@@ -41,39 +43,30 @@ def setup():
     s.send("USER %s %s bla :%s\r\n" % (nick, nick, nick))
 
 
-def display_hello_message():
-    # TODO: documentation
-    '''
-    '''
-
-    print("\nHello!\n\n\n")
-
-
-def parse_sender_info(sender):
-    # TODO: documentation
-    '''
-    '''
-
-    for i, letter in sender:
-        if letter == '!':
-            return sender[1:i]
-
-
 def connect_to_channels(channels):
-    # TODO: documentation
-    '''
-    '''
+    '''After pinging connect to predefined channels.
 
-    # TODO: Add some randomized quotes.
-    hello_msg = "Hello, world!"
+    ([strings]) -> socket.send()
+
+    >>> connect_to_channels(['#weezky1', '#weezky2'])
+    s.send('JOIN #weezky\r\n')
+    s.send('JOIN #weezky\r\n')
+
+    '''
 
     for channel in channels:
         s.send("JOIN %s\r\n" % channel)
 
 
 def strip_sentence(statement, command):
-    # TODO: documentation
-    '''
+    '''Strips a sentence to reveive only words.
+    Also omits the command at the beginning of the sentence.
+
+    (str) -> [strings]
+
+    >>> strip_sentence(':!command This is a sentence.')
+    ['this', 'is', 'a', 'sentence.']
+
     '''
 
     words = []
@@ -92,15 +85,18 @@ def strip_sentence(statement, command):
     return words
 
 
-def get_command(mode, channel, command, sender):
-    # TODO: documentation
-    '''
+def get_command(mode, channel, command):
+    '''Decide what to do based on the user input.
+
+    (str, str, [strings], str) -> socket.send()
+
+    >>> get_command('PRIVMSG', '#weezky', ':!quote')
+    socket.send('PRIVMSG #weezky :Houston, we have a problem.\r\n')
+
     '''
 
     message = ""
 
-    # TODO: check if command was directed from a channel(#) or from a PM
-    # TODO: group those commands somewhere?
     if mode == 'PRIVMSG':
         print command
         if ':!uptime' in command:
@@ -112,17 +108,14 @@ def get_command(mode, channel, command, sender):
             message = gif(channel, tags)
 
         elif ':!join' in command:
-            # TODO: return some kind of a message?
             channels = strip_sentence(':!join', command)
             join(s, channels)
 
         elif ':!part' in command:
-            # TODO: return some kind of a message?
             channels = strip_sentence(':!part', command)
             part(s, channels)
 
         elif ':!quote' in command:
-            # TODO: how to exactly pass a random quote?
             msg = random.choice(quotes['quotes'])
             message = quote(channel, msg)
 
@@ -130,62 +123,61 @@ def get_command(mode, channel, command, sender):
         msg = random.choice(quotes['kicked'])
         message = rejoin(s, channel, msg)
 
-    # TODO: Add displaying current time
-    # TODO: What to display?
     if message:
         print(">>> %s" % message[:-4])
         s.send(message)
 
 
 def get_input(line):
-    # TODO: documentation
-    '''
+    '''Analyzes every line that weezky receives.
+    Sends the data further to get_command().
+
+    ([strings]) -> [strings]
+
+    >>> get_input(['this', 'is', 'a', 'line'])
+    get_command()
+
     '''
 
     for i, item in enumerate(line):
-        # TODO: make the bot understand commands
-        # TODO: make the bot react to commands
-        # TODO: trim the user that sends messages
-        # TODO: format: date, mode, channel, sender, msg
         if item in modes:
             mode = item
-            sender = line[i - 1]
             channel = line[i + 1]
             command = line[i:]
-            get_command(mode, channel, command, sender)
+            get_command(mode, channel, command)
 
         else:
-            # TODO: What to display?
             print item + " | ",
 
     print ""
 
 
 def main():
-    # TODO: documentation
-    '''
+    '''Main function. Takes care of all the logic.
+    Listens, reacts to commands, sometimes talks.
+    Cool stuff!
+
     '''
 
-    # TODO: documentation
+    # establish the connection
     setup()
-    display_hello_message()
 
     readbuffer = ""
 
     while True:
-        # TODO: documentation
+        # listen to what's going on
         readbuffer = readbuffer + s.recv(1024)
         temp = string.split(readbuffer, "\n")
         readbuffer = temp.pop( )
 
-        # TODO: documentation
+        # analyze what's going on
         for line in temp:
             line = string.rstrip(line)
             line = string.split(line)
 
             get_input(line)
 
-            # TODO: documentation
+            # ping pong!
             if(line[0]=="PING"):
                 s.send("PONG %s\r\n" % line[1])
                 connect_to_channels(channels)

@@ -3,7 +3,7 @@
 
 
 # description
-# commands module that contains all commands that weezky reacts to:
+# Commands module that contains all commands that weezky reacts to:
 # !rejoin - rejoin a channel after being kicked, say something
 # !uptime - get info about the uptime
 # !gif <tag(s)> - get a gif with given tag(s)
@@ -90,7 +90,7 @@ def uptime(channel, uptime):
 def gif(channel, tags):
     '''Collects a gif with given tag(s).
 
-    ([list of strings]) -> str
+    ([strings]) -> str
 
     >>> get_gif()
     "No tags given!"
@@ -139,7 +139,7 @@ def join(s, channels):
     # >>> I'm already there, silly!
     '''Join channel(s).
 
-    (socket, [list of strings]) -> socket.send()
+    (socket, [strings]) -> socket.send()
 
     >>> join(s, ['#weezky1', '#weezky2'])
     s.send('JOIN #weezky1\r\n')
@@ -155,7 +155,7 @@ def part(s, channels):
     # TODO?: Add a quote for leaving, like 'Arrivederci!!'
     '''Part(leave) channel(s).
 
-    (socket, [list of strings]) -> socket.send()
+    (socket, [strings]) -> socket.send()
 
     >>> leave(s, ['#weezky1', '#weezky2'])
     s.send('PART #weezky1\r\n')
