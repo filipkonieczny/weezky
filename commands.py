@@ -135,6 +135,8 @@ def gif(channel, tags):
 
 
 def join(s, channels):
+    # TODO?: if weezky's already there say something like:
+    # >>> I'm already there, silly!
     '''Join channel(s).
 
     (socket, [list of strings]) -> socket.send()
@@ -150,6 +152,7 @@ def join(s, channels):
 
 
 def part(s, channels):
+    # TODO?: Add a quote for leaving, like 'Arrivederci!!'
     '''Part(leave) channel(s).
 
     (socket, [list of strings]) -> socket.send()
