@@ -7,7 +7,6 @@
 
 
 # imports
-import sys
 import socket
 import string
 import time
@@ -19,7 +18,7 @@ from commands import rejoin, uptime, gif, join, part, quote
 
 # settings
 s = socket.socket()
-channels = ['#weezky', '#jhgrng']
+channels = ['#weezky']
 modes = ['PRIVMSG', 'KICK']
 time_at_start = time.time()
 
@@ -33,12 +32,8 @@ quotes = json.loads(quotes_file)
 def setup():
     # TODO: documentation
     '''
-
     '''
 
-
-    host = "irc.quakenet.net"
-    port = 6667
     nick = "weezky"
 
     s.connect(('irc.quakenet.org', 6667))
@@ -51,7 +46,6 @@ def display_hello_message():
     '''
     '''
 
-
     print("\nHello!\n\n\n")
 
 
@@ -59,7 +53,6 @@ def parse_sender_info(sender):
     # TODO: documentation
     '''
     '''
-
 
     for i, letter in sender:
         if letter == '!':
@@ -69,9 +62,7 @@ def parse_sender_info(sender):
 def connect_to_channels(channels):
     # TODO: documentation
     '''
-
     '''
-
 
     # TODO: Add some randomized quotes.
     hello_msg = "Hello, world!"
@@ -84,7 +75,6 @@ def strip_sentence(statement, command):
     # TODO: documentation
     '''
     '''
-
 
     words = []
 
@@ -106,7 +96,6 @@ def get_command(mode, channel, command, sender):
     # TODO: documentation
     '''
     '''
-
 
     message = ""
 
@@ -153,7 +142,6 @@ def get_input(line):
     '''
     '''
 
-
     for i, item in enumerate(line):
         # TODO: make the bot understand commands
         # TODO: make the bot react to commands
@@ -176,16 +164,13 @@ def get_input(line):
 def main():
     # TODO: documentation
     '''
-
     '''
-
 
     # TODO: documentation
     setup()
     display_hello_message()
 
     readbuffer = ""
-
 
     while True:
         # TODO: documentation
