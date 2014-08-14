@@ -110,8 +110,6 @@ def gif(channel, tags):
     if len(tags) == 0:
         return 'PRIVMSG %s :%s\r\n' % (channel, "There are no tags!")
 
-    print "tags:", tags
-
     # generate a search url for the image with given tags
     url_destination = "http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag="
 
